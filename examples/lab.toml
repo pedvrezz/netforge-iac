@@ -1,0 +1,64 @@
+[site]
+name = "Mozhtech Network Lab"
+domain = "lab.example"
+trunk_interface = "eth1"
+dhcp_lease = "12h"
+
+[[networks]]
+name = "management"
+vlan_id = 10
+subnet = "10.10.10.0/24"
+gateway = "10.10.10.1"
+dhcp_start = "10.10.10.100"
+dhcp_end = "10.10.10.199"
+dns_servers = ["10.10.10.10", "10.10.10.11"]
+description = "Switches, access points and controllers"
+
+[[networks]]
+name = "users"
+vlan_id = 20
+subnet = "10.10.20.0/24"
+gateway = "10.10.20.1"
+dhcp_start = "10.10.20.50"
+dhcp_end = "10.10.20.220"
+dns_servers = ["10.10.10.10", "10.10.10.11"]
+description = "Corporate workstations"
+
+[[networks]]
+name = "guests"
+vlan_id = 30
+subnet = "10.10.30.0/24"
+gateway = "10.10.30.1"
+dhcp_start = "10.10.30.20"
+dhcp_end = "10.10.30.240"
+dns_servers = ["1.1.1.1", "9.9.9.9"]
+description = "Internet-only guest devices"
+
+[[networks]]
+name = "servers"
+vlan_id = 40
+subnet = "10.10.40.0/24"
+gateway = "10.10.40.1"
+dns_servers = ["10.10.40.10"]
+description = "Static-address server segment"
+
+[[hosts]]
+name = "ad01"
+network = "servers"
+address = "10.10.40.10"
+mac = "02:00:00:00:40:10"
+description = "Primary directory and DNS server"
+
+[[hosts]]
+name = "monitor01"
+network = "servers"
+address = "10.10.40.20"
+mac = "02:00:00:00:40:20"
+description = "Monitoring server"
+
+[[hosts]]
+name = "controller01"
+network = "management"
+address = "10.10.10.20"
+mac = "02:00:00:00:10:20"
+description = "Network controller"
